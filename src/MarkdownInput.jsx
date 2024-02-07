@@ -7,11 +7,12 @@ import FormControl from '@mui/material/FormControl';
 import Card from '@mui/material/Card';
 import { useState } from 'react';
 import NoteDisplay from './NoteDisplay';
+import defaultMarkdown from './defaultMarkdownText';
 
 export default function MarkdownInput({ saveNote, selectedNote, onCancelEdit}) {
   // Инициализация состояний на основе selectedNote
-  const [title, setTitle] = useState(selectedNote?.title || 'Title');
-  const [markdown, setMarkdown] = useState(selectedNote?.markdown || '#### write your note here');
+  const [title, setTitle] = useState(selectedNote?.title || "Today's Inspiration:");
+  const [markdown, setMarkdown] = useState(selectedNote?.markdown || defaultMarkdown);
 
   function handleBtnClear() {
     setMarkdown('');

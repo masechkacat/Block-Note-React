@@ -17,6 +17,15 @@ export default function App() {
   const [openDialog, setOpenDialog] = useState(false);
   const [noteToDelete, setNoteToDelete] = useState(null);
 
+  useEffect(() => {
+    const savedNotes = JSON.parse(localStorage.getItem('notes')) || []; // Получаем заметки из localStorage
+    setNotes(savedNotes);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes)); // Сохраняем заметки в localStorage
+  }, [notes]);
+
   const handleOpenDialog = (noteId) => {
     setNoteToDelete(noteId);
     setOpenDialog(true);
@@ -33,15 +42,6 @@ export default function App() {
     //   setSelectedNote(null);
     // }
   };
-
-  useEffect(() => {
-    const savedNotes = JSON.parse(localStorage.getItem('notes')) || []; // Получаем заметки из localStorage
-    setNotes(savedNotes);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('notes', JSON.stringify(notes)); // Сохраняем заметки в localStorage
-  }, [notes]);
 
   const saveNote = (title, markdown) => {
     if (selectedNote && selectedNote.id) {
@@ -71,7 +71,7 @@ export default function App() {
   };
 
   const handleAddNoteClick = () => {
-    setSelectedNote({ id: null, title: '', markdown: '#### New Note' }); // Подготавливаем пустую заметку
+    setSelectedNote({ id: null, title: '', markdown: '' }); // Подготавливаем пустую заметку
     setIsEditing(true); // Включаем режим редактирования
   };
 

@@ -12,7 +12,7 @@ const NotesList = ({ notes, setSelectedNote, setIsEditing }) => {
     <Box sx={{ overflowY: 'auto' }}>
       {notes.map((note) => (
         <Box key={note.id} sx={{ cursor: 'pointer', '&:hover': { bgcolor: 'action.hover' }}} onClick={() => handleNoteClick(note)}>
-          <NoteDisplay title={note.title} markdown={note.markdown} />
+          <NoteDisplay title={note.title} markdown={note.markdown} truncate={true} />
         </Box>
       ))}
     </Box>
