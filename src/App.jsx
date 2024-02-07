@@ -38,9 +38,9 @@ export default function App() {
     setOpenDialog(false); // Закрываем диалог после удаления
     setNoteToDelete(null); // Сбрасываем ID удаляемой заметки
     // Если удаляемая заметка сейчас выбрана, сбрасываем выбранную заметку
-    // if (selectedNote && selectedNote.id === noteId) {
-    //   setSelectedNote(null);
-    // }
+    if (selectedNote && selectedNote.id === noteId) {
+      setSelectedNote(null);
+    }
   };
 
   const saveNote = (title, markdown) => {
