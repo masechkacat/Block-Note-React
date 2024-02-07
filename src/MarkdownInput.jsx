@@ -8,11 +8,15 @@ import Card from '@mui/material/Card';
 import { useState } from 'react';
 import NoteDisplay from './NoteDisplay';
 import defaultMarkdown from './defaultMarkdownText';
+import SuccessAlert from './SuccesAlert';
 
 export default function MarkdownInput({ saveNote, selectedNote, onCancelEdit}) {
   // Инициализация состояний на основе selectedNote
   const [title, setTitle] = useState(selectedNote?.title || "Today's Inspiration:");
   const [markdown, setMarkdown] = useState(selectedNote?.markdown || defaultMarkdown);
+  const [showAlert, setShowAlert] = useState(false);
+
+  
 
   function handleBtnClear() {
     setMarkdown('');
@@ -20,6 +24,11 @@ export default function MarkdownInput({ saveNote, selectedNote, onCancelEdit}) {
   }
 
   function handleBtnSave() {
+    if (!title.trim() || !markdown.trim()) {
+      setShowAlert(true); // Показываем алерт, если поля не заполнены
+      setTimeout(() => setShowAlert(false), 3000); // Скрываем алерт через 3 секунды
+      return;
+    }
     saveNote(title, markdown);
     setMarkdown('#### write your note here');
     setTitle('Title');
@@ -27,6 +36,7 @@ export default function MarkdownInput({ saveNote, selectedNote, onCancelEdit}) {
 
   return (
     <>
+    {showAlert && <SuccessAlert message="Please fill in both fields" severity="warning" />}
     <Box component={'div'} sx={{ flexDirection: 'column', m: 3 }}>
     <NoteDisplay markdown={markdown} title={title} />
       <Card  sx={{ display: 'flex', flexDirection: 'column' }} variant="outlined">
