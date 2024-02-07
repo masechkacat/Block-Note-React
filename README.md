@@ -28,8 +28,8 @@ This project is a simple notepad application designed to demonstrate the basics 
 To run this project locally:
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/masechkacat/Block-Note-React.git
+cd Block-Note-React
 npm install
 npm run dev
 ```
